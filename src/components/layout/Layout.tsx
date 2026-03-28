@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../utils/cn';
 import { useStore } from '../../store/useStore';
 import { ToastContainer } from '../ui/Toast';
-import { InstallPrompt } from '../ui/InstallPrompt';
 
 export const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -197,7 +196,6 @@ export const Layout = () => {
       </main>
 
       <ToastContainer toasts={toasts} onDismiss={removeToast} />
-      <InstallPrompt />
     </div>
   );
 };
