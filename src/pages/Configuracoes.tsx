@@ -99,21 +99,21 @@ export const Configuracoes = () => {
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8 max-w-3xl">
       <div>
-        <h1 className="text-3xl font-bold text-[#F0EDE8]">Configurações</h1>
-        <p className="text-[#5A5650] mt-1">Personalize o app do seu jeito.</p>
+        <h1 className="text-3xl font-bold text-app-text">Configurações</h1>
+        <p className="text-app-text-muted mt-1">Personalize o app do seu jeito.</p>
       </div>
 
       {/* Theme */}
       <Card>
         <div className="flex items-center gap-3 mb-4">
-          <Eye size={20} className="text-[#5A5650]" />
-          <h2 className="text-lg font-bold text-[#F0EDE8]">Tema</h2>
+          <Eye size={20} className="text-app-text-muted" />
+          <h2 className="text-lg font-bold text-app-text">Tema</h2>
         </div>
         <div className="flex gap-3">
-          <button onClick={() => { if (theme === 'dark') toggleTheme(); }} className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border-2 transition-all cursor-pointer ${theme === 'light' ? 'border-white/6/30 bg-[#1C1C22] text-[#F0EDE8]' : 'border-white/6 text-[#5A5650] hover:border-[#D4A574]/25'}`}>
+          <button onClick={() => { if (theme === 'dark') toggleTheme(); }} className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border-2 transition-all cursor-pointer ${theme === 'light' ? 'border-app-border-light/30 bg-app-surface-light text-app-text' : 'border-app-border-light text-app-text-muted hover:border-[#D4A574]/25'}`}>
             <Sun size={18} /> Claro
           </button>
-          <button onClick={() => { if (theme === 'light') toggleTheme(); }} className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border-2 transition-all cursor-pointer ${theme === 'dark' ? 'border-white/6/30 bg-[#1C1C22] text-[#F0EDE8]' : 'border-white/6 text-[#5A5650] hover:border-[#D4A574]/25'}`}>
+          <button onClick={() => { if (theme === 'light') toggleTheme(); }} className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border-2 transition-all cursor-pointer ${theme === 'dark' ? 'border-app-border-light/30 bg-app-surface-light text-app-text' : 'border-app-border-light text-app-text-muted hover:border-[#D4A574]/25'}`}>
             <Moon size={18} /> Escuro
           </button>
         </div>
@@ -122,23 +122,23 @@ export const Configuracoes = () => {
       {/* Background Image */}
       <Card>
         <div className="flex items-center gap-3 mb-4">
-          <ImageIcon size={20} className="text-[#5A5650]" />
-          <h2 className="text-lg font-bold text-[#F0EDE8]">Imagem de Fundo</h2>
+          <ImageIcon size={20} className="text-app-text-muted" />
+          <h2 className="text-lg font-bold text-app-text">Imagem de Fundo</h2>
         </div>
         {bgImage ? (
           <div className="relative rounded-xl overflow-hidden h-32 group">
             <img src={bgImage} alt="Fundo" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              <button onClick={handleRemoveBgImage} className="bg-red-500/50/80 text-[#F0EDE8] p-2.5 rounded-full shadow-lg cursor-pointer hover:bg-red-600/90">
+              <button onClick={handleRemoveBgImage} className="bg-red-500/50/80 text-app-text p-2.5 rounded-full shadow-lg cursor-pointer hover:bg-red-600/90">
                 <Trash2 size={18} />
               </button>
             </div>
           </div>
         ) : (
-          <label className="flex items-center justify-center h-24 border-2 border-dashed border-[#D4A574]/25 rounded-xl cursor-pointer hover:bg-[#141418]/50 transition-colors">
+          <label className="flex items-center justify-center h-24 border-2 border-dashed border-[#D4A574]/25 rounded-xl cursor-pointer hover:bg-app-surface/50 transition-colors">
             <div className="text-center">
-              <ImageIcon size={24} className="mx-auto text-[#5A5650] mb-1" />
-              <span className="text-xs text-[#5A5650]">Clique para enviar imagem (máx. 10MB)</span>
+              <ImageIcon size={24} className="mx-auto text-app-text-muted mb-1" />
+              <span className="text-xs text-app-text-muted">Clique para enviar imagem (máx. 10MB)</span>
             </div>
             <input type="file" accept="image/*" className="hidden" onChange={handleBgImageUpload} />
           </label>
@@ -148,16 +148,16 @@ export const Configuracoes = () => {
       {/* Personalization */}
       <Card>
         <div className="flex items-center gap-3 mb-4">
-          <Heart size={20} className="text-[#5A5650]" />
-          <h2 className="text-lg font-bold text-[#F0EDE8]">Personalização</h2>
+          <Heart size={20} className="text-app-text-muted" />
+          <h2 className="text-lg font-bold text-app-text">Personalização</h2>
         </div>
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Nomes do Casal</label>
+            <label className="block text-xs font-medium text-app-text-muted mb-1 uppercase tracking-wider">Nomes do Casal</label>
             <input type="text" value={coupleNames} onChange={e => setCoupleNames(e.target.value)} className="glass-input py-2.5" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Subtítulo</label>
+            <label className="block text-xs font-medium text-app-text-muted mb-1 uppercase tracking-wider">Subtítulo</label>
             <input type="text" value={subtitle} onChange={e => setSubtitle(e.target.value)} className="glass-input py-2.5" />
           </div>
           <Button onClick={handleSaveNames} size="sm">Salvar Nomes</Button>
@@ -167,8 +167,8 @@ export const Configuracoes = () => {
       {/* Data */}
       <Card>
         <div className="flex items-center gap-3 mb-4">
-          <Download size={20} className="text-[#5A5650]" />
-          <h2 className="text-lg font-bold text-[#F0EDE8]">Dados</h2>
+          <Download size={20} className="text-app-text-muted" />
+          <h2 className="text-lg font-bold text-app-text">Dados</h2>
         </div>
         <div className="flex flex-wrap gap-3">
           <Button onClick={handleExport} variant="secondary" className="gap-2"><Download size={16} />Exportar Backup</Button>

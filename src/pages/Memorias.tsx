@@ -109,8 +109,8 @@ export const Memorias = () => {
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-[#F0EDE8]">Memórias</h1>
-          <p className="text-[#5A5650] mt-1">Momentos inesquecíveis que compartilhamos.</p>
+          <h1 className="text-3xl font-bold text-app-text">Memórias</h1>
+          <p className="text-app-text-muted mt-1">Momentos inesquecíveis que compartilhamos.</p>
         </div>
         <Button onClick={() => setIsAdding(true)} className="gap-2">
           <Plus size={18} />
@@ -124,23 +124,23 @@ export const Memorias = () => {
       <AnimatePresence>
         {isAdding && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
-            <form onSubmit={handleAdd} className="glass-panel p-6 rounded-2xl shadow-lg border border-white/60">
+            <form onSubmit={handleAdd} className="glass-panel p-6 rounded-2xl shadow-lg border border-app-border-light">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-bold text-[#F0EDE8]">Adicionar Memória</h3>
-                <button type="button" onClick={() => setIsAdding(false)} className="text-[#5A5650] hover:text-[#9A9590] cursor-pointer"><X size={20} /></button>
+                <h3 className="text-lg font-bold text-app-text">Adicionar Memória</h3>
+                <button type="button" onClick={() => setIsAdding(false)} className="text-app-text-muted hover:text-app-text-secondary cursor-pointer"><X size={20} /></button>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Título</label>
+                    <label className="block text-xs font-medium text-app-text-muted mb-1 uppercase tracking-wider">Título</label>
                     <input type="text" required value={title} onChange={e => setTitle(e.target.value)} className="glass-input" />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Data</label>
+                    <label className="block text-xs font-medium text-app-text-muted mb-1 uppercase tracking-wider">Data</label>
                     <input type="date" required value={date} onChange={e => setDate(e.target.value)} className="glass-input" />
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Descrição</label>
+                    <label className="block text-xs font-medium text-app-text-muted mb-1 uppercase tracking-wider">Descrição</label>
                     <textarea rows={3} value={description} onChange={e => setDescription(e.target.value)} className="glass-input resize-none" />
                   </div>
                 </div>
@@ -165,15 +165,15 @@ export const Memorias = () => {
               <motion.div key={memory.id} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ delay: index * 0.05 }} layout>
                 <Card className="p-3 overflow-hidden group hover:shadow-xl transition-all duration-300 relative">
                   <div className="absolute top-5 right-5 z-10 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button onClick={() => openEdit(memory)} className="bg-[#0A0A0C]/60 text-[#9A9590] p-2 rounded-full shadow-lg cursor-pointer hover:bg-black/60">
+                    <button onClick={() => openEdit(memory)} className="bg-app-bg/60 text-app-text-secondary p-2 rounded-full shadow-lg cursor-pointer hover:bg-black/60">
                       <Edit3 size={14} />
                     </button>
-                    <button onClick={() => setDeleteTarget(memory.id)} className="bg-red-500/50 text-[#F0EDE8] p-2 rounded-full shadow-lg cursor-pointer hover:bg-red-600">
+                    <button onClick={() => setDeleteTarget(memory.id)} className="bg-red-500/50 text-app-text p-2 rounded-full shadow-lg cursor-pointer hover:bg-red-600">
                       <Trash2 size={14} />
                     </button>
                   </div>
                   
-                  <div className="media-thumbnail mb-4 bg-[#1C1C22] flex items-center justify-center cursor-pointer"
+                  <div className="media-thumbnail mb-4 bg-app-surface-light flex items-center justify-center cursor-pointer"
                     onClick={() => {
                       const src = memory.mediaUrl || memory.photoUrl;
                       if (memory.mediaType !== 'video' && memory.mediaType !== 'document') {
@@ -185,7 +185,7 @@ export const Memorias = () => {
                     {memory.mediaType === 'video' ? (
                       <video src={memory.mediaUrl || memory.photoUrl} controls className="absolute inset-0 w-full h-full object-contain" />
                     ) : memory.mediaType === 'document' ? (
-                      <a href={memory.mediaUrl || memory.photoUrl} download={memory.mediaName || 'arquivo'} className="flex flex-col items-center gap-2 text-[#5A5650] p-4 hover:text-[#9A9590] transition-colors absolute inset-0 justify-center">
+                      <a href={memory.mediaUrl || memory.photoUrl} download={memory.mediaName || 'arquivo'} className="flex flex-col items-center gap-2 text-app-text-muted p-4 hover:text-app-text-secondary transition-colors absolute inset-0 justify-center">
                         <FileText size={48} />
                         <span className="text-sm font-medium text-center break-all">{memory.mediaName || 'Arquivo'}</span>
                       </a>
@@ -197,11 +197,11 @@ export const Memorias = () => {
                     )}
                   </div>
                   <div className="px-2 pb-2">
-                    <span className="text-xs font-semibold text-[#9A9590] uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-app-text-secondary uppercase tracking-wider">
                       {format(parseISO(memory.date), "dd 'de' MMMM, yyyy", { locale: ptBR })}
                     </span>
-                    <h3 className="text-lg font-bold text-[#F0EDE8] mt-1">{memory.title}</h3>
-                    <p className="text-[#9A9590] text-sm mt-1 line-clamp-3">{memory.description}</p>
+                    <h3 className="text-lg font-bold text-app-text mt-1">{memory.title}</h3>
+                    <p className="text-app-text-secondary text-sm mt-1 line-clamp-3">{memory.description}</p>
                   </div>
                 </Card>
               </motion.div>
@@ -213,23 +213,23 @@ export const Memorias = () => {
       {/* Edit Modal */}
       <AnimatePresence>
         {editingMemory && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A0A0C]/60 backdrop-blur-sm">
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="glass-panel shadow-2xl rounded-3xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh] border border-white/6">
-              <div className="flex justify-between items-center p-6 border-b border-white/6">
-                <h2 className="text-xl font-bold text-[#F0EDE8]">Editar Memória</h2>
-                <button onClick={() => { setEditingMemory(null); editUpload.clearMedia(); }} className="text-[#5A5650] hover:text-[#9A9590] cursor-pointer"><X size={24} /></button>
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-app-bg/60 backdrop-blur-sm">
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="glass-panel shadow-2xl rounded-3xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh] border border-app-border-light">
+              <div className="flex justify-between items-center p-6 border-b border-app-border-light">
+                <h2 className="text-xl font-bold text-app-text">Editar Memória</h2>
+                <button onClick={() => { setEditingMemory(null); editUpload.clearMedia(); }} className="text-app-text-muted hover:text-app-text-secondary cursor-pointer"><X size={24} /></button>
               </div>
               <form onSubmit={handleUpdate} className="p-6 overflow-y-auto flex-1 space-y-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Título</label>
+                  <label className="block text-xs font-medium text-app-text-muted mb-1 uppercase tracking-wider">Título</label>
                   <input type="text" required value={editTitle} onChange={e => setEditTitle(e.target.value)} className="glass-input py-3" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Data</label>
+                  <label className="block text-xs font-medium text-app-text-muted mb-1 uppercase tracking-wider">Data</label>
                   <input type="date" required value={editDate} onChange={e => setEditDate(e.target.value)} className="glass-input py-3" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Descrição</label>
+                  <label className="block text-xs font-medium text-app-text-muted mb-1 uppercase tracking-wider">Descrição</label>
                   <textarea rows={3} value={editDescription} onChange={e => setEditDescription(e.target.value)} className="glass-input py-3 resize-none" />
                 </div>
                 <MediaUploadField mediaUrl={editUpload.mediaUrl} mediaType={editUpload.mediaType} mediaName={editUpload.mediaName} onFileUpload={editUpload.handleFileUpload} onClear={editUpload.clearMedia} height="h-40" />

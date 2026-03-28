@@ -46,10 +46,10 @@ export const EmptyState: React.FC<EmptyStateProps> = ({ type, searchQuery }) => 
       <div className={`w-20 h-20 rounded-full ${c.bg} flex items-center justify-center mb-6`}>
         <Icon size={36} className={c.color} />
       </div>
-      <h3 className="text-xl font-bold text-[#F0EDE8]/80 mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+      <h3 className="text-xl font-bold text-app-text/80 mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
         {searchQuery ? 'Nenhum resultado' : c.title}
       </h3>
-      <p className="text-[#9A9590] max-w-sm text-sm leading-relaxed">
+      <p className="text-app-text-secondary max-w-sm text-sm leading-relaxed">
         {searchQuery
           ? `Não encontramos nada para "${searchQuery}". Tente outro termo.`
           : c.description}

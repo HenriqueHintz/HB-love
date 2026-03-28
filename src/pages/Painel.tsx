@@ -72,8 +72,8 @@ export const Painel = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-[#F0EDE8]">Painel de Metas</h1>
-          <p className="text-[#5A5650] mt-1">Organize e acompanhe nossos objetivos juntos.</p>
+          <h1 className="text-3xl font-bold text-app-text">Painel de Metas</h1>
+          <p className="text-app-text-muted mt-1">Organize e acompanhe nossos objetivos juntos.</p>
         </div>
         
         <Button onClick={() => setIsAdding(!isAdding)} className="gap-2 whitespace-nowrap">
@@ -86,15 +86,15 @@ export const Painel = () => {
       <div className="glass-panel rounded-2xl p-4 space-y-4">
         <div>
           <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2 text-sm font-medium text-[#9A9590]">
-              <TrendingUp size={16} className="text-[#5A5650]" />
+            <div className="flex items-center gap-2 text-sm font-medium text-app-text-secondary">
+              <TrendingUp size={16} className="text-app-text-muted" />
               Progresso Geral
             </div>
-            <span className="text-sm font-bold text-[#9A9590]">
+            <span className="text-sm font-bold text-app-text-secondary">
               {completedTasks} de {totalTasks} metas ({progressPercent}%)
             </span>
           </div>
-          <div className="w-full h-3 bg-[#1C1C22] rounded-full overflow-hidden">
+          <div className="w-full h-3 bg-app-surface-light rounded-full overflow-hidden">
             <div
               className="progress-fill h-full bg-[#D4A574]/20 rounded-full"
               style={{ width: `${progressPercent}%` }}
@@ -103,18 +103,18 @@ export const Painel = () => {
         </div>
 
         {/* Per-category progress */}
-        <div className="space-y-3 pt-2 border-t border-white/6">
+        <div className="space-y-3 pt-2 border-t border-app-border-light">
           {categoryStats.map(cat => (
             <div key={cat.name}>
               <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-[#9A9590]">
+                <span className="text-xs font-medium text-app-text-secondary">
                   {cat.name}
                 </span>
-                <span className="text-xs font-bold text-[#5A5650]">
+                <span className="text-xs font-bold text-app-text-muted">
                   {cat.done}/{cat.total}
                 </span>
               </div>
-              <div className="w-full h-2 bg-[#141418] rounded-full overflow-hidden">
+              <div className="w-full h-2 bg-app-surface rounded-full overflow-hidden">
                 <div
                   className="progress-fill h-full rounded-full bg-[#D4A574]/15"
                   style={{ width: `${cat.percent}%` }}
@@ -135,7 +135,7 @@ export const Painel = () => {
         />
         <div className="relative">
           <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-            <Filter size={16} className="text-[#5A5650]" />
+            <Filter size={16} className="text-app-text-muted" />
           </div>
           <select
             value={filterCategory}
@@ -156,11 +156,11 @@ export const Painel = () => {
         <motion.form 
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
-          className="glass-panel p-5 rounded-2xl flex flex-col md:flex-row gap-4 items-end overflow-hidden shadow-lg border border-white/6"
+          className="glass-panel p-5 rounded-2xl flex flex-col md:flex-row gap-4 items-end overflow-hidden shadow-lg border border-app-border-light"
           onSubmit={handleAddTask}
         >
           <div className="flex-1 w-full">
-            <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Título da Meta</label>
+            <label className="block text-xs font-medium text-app-text-muted mb-1 uppercase tracking-wider">Título da Meta</label>
             <input 
               type="text" 
               value={newTaskTitle}
@@ -171,7 +171,7 @@ export const Painel = () => {
             />
           </div>
           <div className="w-full md:w-64">
-            <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Categoria</label>
+            <label className="block text-xs font-medium text-app-text-muted mb-1 uppercase tracking-wider">Categoria</label>
             <select 
               value={newTaskCategory}
               onChange={(e) => setNewTaskCategory(e.target.value)}

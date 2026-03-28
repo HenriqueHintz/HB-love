@@ -55,12 +55,12 @@ export const ProgressRing: React.FC<ProgressRingProps> = ({
       </svg>
       {showPercentage && (
         <div className="absolute inset-0 flex items-center justify-center" style={{ width: size, height: size }}>
-          <span className="text-xs font-semibold text-[#F0EDE8]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+          <span className="text-xs font-semibold text-app-text" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
             {Math.round(progress)}%
           </span>
         </div>
       )}
-      {label && <span className="text-[10px] text-[#5A5650] text-center">{label}</span>}
+      {label && <span className="text-[10px] text-app-text-muted text-center">{label}</span>}
     </div>
   );
 };

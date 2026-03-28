@@ -2,32 +2,79 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root {
+  /* Ivory Cinematic (Light Mode) */
+  --app-bg: #FDFBF7;
+  --app-surface: #F5F0E6;
+  --app-surface-light: #E8E5DF;
+  --app-text: #1A1814;
+  --app-text-secondary: #5A5650;
+  --app-text-muted: #9A9590;
+  --app-border: rgba(0, 0, 0, 0.1);
+  --app-border-light: rgba(0, 0, 0, 0.04);
+  
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --glass-input-bg: rgba(255, 255, 255, 0.6);
+  --glass-input-border: rgba(0, 0, 0, 0.08);
+  --sidebar-overlay: rgba(253, 251, 247, 0.85);
+  --progress-track: rgba(0, 0, 0, 0.05);
+}
+
+.dark {
+  /* Noir Cinematic (Dark Mode) */
+  --app-bg: #0A0A0C;
+  --app-surface: #141418;
+  --app-surface-light: #1C1C22;
+  --app-text: #F0EDE8;
+  --app-text-secondary: #9A9590;
+  --app-text-muted: #5A5650;
+  --app-border: rgba(255, 255, 255, 0.1);
+  --app-border-light: rgba(255, 255, 255, 0.04);
+
+  --glass-bg: rgba(20, 20, 24, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-input-bg: rgba(28, 28, 34, 0.6);
+  --glass-input-border: rgba(255, 255, 255, 0.08);
+  --sidebar-overlay: rgba(10, 10, 12, 0.7);
+  --progress-track: rgba(255, 255, 255, 0.05);
+}
+
 @theme {
   --color-beige-50: #fdfbf7;
   --color-beige-100: #f5f0e6;
+  
+  --color-app-bg: var(--app-bg);
+  --color-app-surface: var(--app-surface);
+  --color-app-surface-light: var(--app-surface-light);
+  --color-app-text: var(--app-text);
+  --color-app-text-secondary: var(--app-text-secondary);
+  --color-app-text-muted: var(--app-text-muted);
+  --color-app-border: var(--app-border);
+  --color-app-border-light: var(--app-border-light);
 }
 
-/* Body — Noir Cinematic */
+/* Body — Dynamic Theme */
 body {
-  background: #0A0A0C;
+  background: var(--app-bg);
   min-height: 100vh;
-  color: #F0EDE8;
+  color: var(--app-text);
   font-family: 'Inter', system-ui, sans-serif;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Glass Panel — Noir glassmorphism */
+/* Glass Panel — Dynamic glassmorphism */
 .glass-panel {
-  background: rgba(20, 20, 24, 0.75);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05), 0 0 0 1px var(--glass-border);
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glass-panel:hover {
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--app-border);
 }
 
 /* Scrollbar */
@@ -38,7 +85,7 @@ body {
 
 /* Sidebar overlay */
 .sidebar-overlay {
-  background: rgba(10, 10, 12, 0.7);
+  background: var(--sidebar-overlay);
   backdrop-filter: blur(8px);
 }
 
@@ -50,9 +97,9 @@ body {
   font-size: 1.5rem;
   font-weight: 700;
   border-radius: 0.75rem;
-  border: 2px solid rgba(255, 255, 255, 0.08);
-  background: rgba(28, 28, 34, 0.8);
-  color: #F0EDE8;
+  border: 2px solid var(--glass-input-border);
+  background: var(--glass-input-bg);
+  color: var(--app-text);
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -64,11 +111,11 @@ body {
 /* Glass Input — Noir */
 .glass-input {
   width: 100%;
-  background: rgba(28, 28, 34, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--glass-input-bg);
+  border: 1px solid var(--glass-input-border);
   border-radius: 0.75rem;
   padding: 0.5rem 1rem;
-  color: #F0EDE8;
+  color: var(--app-text);
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -77,7 +124,7 @@ body {
   box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.12);
 }
 .glass-input::placeholder {
-  color: rgba(240, 237, 232, 0.3);
+  color: var(--app-text-muted);
 }
 
 /* Progress bar animation */
@@ -109,11 +156,7 @@ img, video, iframe {
   width: 100%;
   overflow: hidden;
   border-radius: 0.75rem;
-  background: rgba(0, 0, 0, 0.04);
-}
-
-.dark .media-container {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--progress-track);
 }
 
 .media-container img,
@@ -131,11 +174,7 @@ img, video, iframe {
   aspect-ratio: 16 / 10;
   overflow: hidden;
   border-radius: 0.75rem;
-  background: rgba(0, 0, 0, 0.04);
-}
-
-.dark .media-thumbnail {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--progress-track);
 }
 
 .media-thumbnail img,

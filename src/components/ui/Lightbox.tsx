@@ -22,7 +22,7 @@ export const Lightbox: React.FC<LightboxProps> = ({ open, src, alt, onClose }) =
         >
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-white/80 hover:text-white p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer z-10"
+            className="absolute top-4 right-4 text-white/80 hover:text-white p-2 rounded-full bg-app-border hover:bg-white/20 transition-colors cursor-pointer z-10"
           >
             <X size={24} />
           </button>

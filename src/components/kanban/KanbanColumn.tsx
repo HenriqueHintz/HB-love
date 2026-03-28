@@ -27,7 +27,7 @@ export const KanbanColumn: React.FC<KanbanColumnProps> = ({ status, tasks, total
   const highlight = isDropTarget || isOver;
 
   return (
-    <div className={`flex flex-col rounded-2xl p-4 h-full transition-all duration-200 ${highlight ? 'bg-[#D4A574]/5 border border-[#D4A574]/20 ring-1 ring-[#D4A574]/10' : 'bg-[#141418]/50 border border-white/4'}`}>
+    <div className={`flex flex-col rounded-2xl p-4 h-full transition-all duration-200 ${highlight ? 'bg-[#D4A574]/5 border border-[#D4A574]/20 ring-1 ring-[#D4A574]/10' : 'bg-app-surface/50 border border-app-border-light'}`}>
       <div className="flex items-center justify-between mb-4 px-2">
         <div className="flex items-center gap-2.5">
           <div className={`w-2 h-2 rounded-full ${a.dot}`} />
@@ -44,14 +44,14 @@ export const KanbanColumn: React.FC<KanbanColumnProps> = ({ status, tasks, total
         </SortableContext>
         
         {tasks.length === 0 && (
-          <div className={`flex items-center justify-center h-24 border-2 border-dashed rounded-xl text-sm transition-colors ${highlight ? 'border-[#D4A574]/30 text-[#D4A574]/50' : 'border-white/6 text-[#5A5650]'}`}>
+          <div className={`flex items-center justify-center h-24 border-2 border-dashed rounded-xl text-sm transition-colors ${highlight ? 'border-[#D4A574]/30 text-[#D4A574]/50' : 'border-app-border-light text-app-text-muted'}`}>
             Arraste para cá
           </div>
         )}
       </div>
       
       {hasMore && onLoadMore && (
-        <button onClick={onLoadMore} className="mt-3 w-full flex items-center justify-center gap-1 text-xs font-medium text-[#5A5650] hover:text-[#9A9590] py-2 rounded-xl hover:bg-white/5 transition-colors cursor-pointer">
+        <button onClick={onLoadMore} className="mt-3 w-full flex items-center justify-center gap-1 text-xs font-medium text-app-text-muted hover:text-app-text-secondary py-2 rounded-xl hover:bg-app-border-light transition-colors cursor-pointer">
           <ChevronDown size={14} />Ver mais ({totalCount - tasks.length} restantes)
         </button>
       )}

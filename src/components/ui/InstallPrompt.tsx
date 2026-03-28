@@ -65,7 +65,7 @@ export const InstallPrompt: React.FC = () => {
         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
         className="fixed bottom-6 left-4 right-4 md:left-auto md:right-6 md:max-w-sm z-50"
       >
-        <div className="bg-[#141418] rounded-2xl shadow-2xl border border-white/4 p-5 flex items-start gap-4">
+        <div className="bg-app-surface rounded-2xl shadow-2xl border border-app-border-light p-5 flex items-start gap-4">
           {/* Icon */}
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center shrink-0 shadow-md">
             <Heart size={22} className="text-white" fill="white" />
@@ -73,8 +73,8 @@ export const InstallPrompt: React.FC = () => {
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-bold text-[#F0EDE8]">Instale nosso app 💖</h3>
-            <p className="text-xs text-[#9A9590] mt-0.5 leading-relaxed">
+            <h3 className="text-sm font-bold text-app-text">Instale nosso app 💖</h3>
+            <p className="text-xs text-app-text-secondary mt-0.5 leading-relaxed">
               Acesse offline e tenha uma experiência completa direto na sua tela inicial.
             </p>
             <div className="flex items-center gap-2 mt-3">
@@ -87,7 +87,7 @@ export const InstallPrompt: React.FC = () => {
               </button>
               <button
                 onClick={handleDismiss}
-                className="px-3 py-2 text-xs font-medium text-[#5A5650] hover:text-[#9A9590] transition-colors cursor-pointer"
+                className="px-3 py-2 text-xs font-medium text-app-text-muted hover:text-app-text-secondary transition-colors cursor-pointer"
               >
                 Agora não
               </button>
@@ -97,7 +97,7 @@ export const InstallPrompt: React.FC = () => {
           {/* Close */}
           <button
             onClick={handleDismiss}
-            className="text-[#5A5650] hover:text-[#9A9590] transition-colors cursor-pointer shrink-0"
+            className="text-app-text-muted hover:text-app-text-secondary transition-colors cursor-pointer shrink-0"
           >
             <X size={16} />
           </button>

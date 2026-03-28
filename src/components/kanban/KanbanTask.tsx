@@ -69,7 +69,7 @@ export const KanbanTask: React.FC<KanbanTaskProps> = ({ task, isDragOverlay }) =
       transition={{ duration: 0.15 }}
       ref={isDragOverlay ? undefined : setNodeRef}
       style={style}
-      className={`group relative bg-[#141418]/80 border border-white/6 border-l-2 ${s.border} rounded-xl p-3.5 mb-2.5 cursor-pointer transition-all duration-200 hover:bg-[#1C1C22] hover:border-white/10 hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)] ${isDragging && !isDragOverlay ? 'ring-2 ring-[#D4A574]/30' : ''} ${isDragOverlay ? 'shadow-2xl' : ''}`}
+      className={`group relative bg-app-surface/80 border border-app-border-light border-l-2 ${s.border} rounded-xl p-3.5 mb-2.5 cursor-pointer transition-all duration-200 hover:bg-app-surface-light hover:border-app-border hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)] ${isDragging && !isDragOverlay ? 'ring-2 ring-[#D4A574]/30' : ''} ${isDragOverlay ? 'shadow-2xl' : ''}`}
       onClick={() => !isDragOverlay && setEditingTaskId(task.id)}
     >
       {task.mediaUrl && (
@@ -98,21 +98,21 @@ export const KanbanTask: React.FC<KanbanTaskProps> = ({ task, isDragOverlay }) =
           <span className={`inline-block px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-md mb-1.5 truncate max-w-full ${s.badge}`}>
             {task.category}
           </span>
-          <p className="text-sm font-medium text-[#F0EDE8] leading-snug line-clamp-2">{task.title}</p>
-          {task.description && <div className="mt-1.5 text-[#5A5650]"><AlignLeft size={13} /></div>}
+          <p className="text-sm font-medium text-app-text leading-snug line-clamp-2">{task.title}</p>
+          {task.description && <div className="mt-1.5 text-app-text-muted"><AlignLeft size={13} /></div>}
         </div>
       </div>
 
       {!isDragOverlay && (
-        <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-white/6">
+        <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-app-border-light">
           {canGoBack && (
-            <button onClick={handleGoBack} className="flex items-center gap-1 px-2 py-1 text-[11px] font-medium text-[#5A5650] hover:text-[#9A9590] hover:bg-white/5 rounded-lg transition-colors cursor-pointer">
+            <button onClick={handleGoBack} className="flex items-center gap-1 px-2 py-1 text-[11px] font-medium text-app-text-muted hover:text-app-text-secondary hover:bg-app-border-light rounded-lg transition-colors cursor-pointer">
               <ChevronLeft size={12} />{PREV_LABELS[task.status]}
             </button>
           )}
           <div className="flex-1" />
           {canAdvance ? (
-            <button onClick={handleAdvance} className={`flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold rounded-lg transition-colors cursor-pointer ${s.accent} hover:bg-white/5`}>
+            <button onClick={handleAdvance} className={`flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold rounded-lg transition-colors cursor-pointer ${s.accent} hover:bg-app-border-light`}>
               {STATUS_LABELS[task.status]}{currentIndex === 1 ? <Check size={12} /> : <ChevronRight size={12} />}
             </button>
           ) : (

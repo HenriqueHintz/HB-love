@@ -33,7 +33,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{ duration: 0.15 }}
-            className="bg-[#141418] border border-white/50 shadow-2xl rounded-2xl w-full max-w-sm p-6"
+            className="bg-app-surface border border-white/50 shadow-2xl rounded-2xl w-full max-w-sm p-6"
           >
             <div className="flex items-center gap-3 mb-4">
               <div
@@ -45,10 +45,10 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
               >
                 <AlertTriangle size={20} />
               </div>
-              <h3 className="text-lg font-bold text-[#F0EDE8] dark:text-[#F0EDE8]">{title}</h3>
+              <h3 className="text-lg font-bold text-app-text dark:text-app-text">{title}</h3>
             </div>
 
-            <p className="text-[#9A9590] dark:text-[#5A5650] mb-6 text-sm leading-relaxed">
+            <p className="text-app-text-secondary dark:text-app-text-muted mb-6 text-sm leading-relaxed">
               {message}
             </p>
 
