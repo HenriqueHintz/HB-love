@@ -1,13 +1,20 @@
 {
   "name": "Nossa Jornada Juntos",
   "short_name": "Jornada",
-  "description": "Painel de organização da vida do casal Henrique & Brenda",
+  "description": "Painel de organização da vida do casal Henrique & Brenda — metas, memórias, conquistas e linha do tempo.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#fff1f2",
-  "theme_color": "#f43f5e",
+  "background_color": "#0A0A0C",
+  "theme_color": "#0A0A0C",
   "orientation": "any",
+  "categories": ["lifestyle", "social"],
   "icons": [
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
     {
       "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>",
       "sizes": "any",

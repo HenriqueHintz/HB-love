@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../utils/cn';
 import { useStore } from '../../store/useStore';
 import { ToastContainer } from '../ui/Toast';
+import { InstallPrompt } from '../ui/InstallPrompt';
 
 export const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -66,18 +67,23 @@ export const Layout = () => {
   const closeSidebar = () => setSidebarOpen(false);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <div className="min-h-screen flex flex-col md:flex-row relative overflow-hidden">
+      {/* Ambient background blurs for cinematic noir feel */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-[#D4A574]/5 rounded-full blur-[120px]" />
+        <div className="absolute top-[60%] -right-[10%] w-[40%] h-[40%] bg-[#C97B8B]/5 rounded-full blur-[100px]" />
+      </div>
       {/* Mobile header bar */}
-      <div className="md:hidden flex items-center justify-between p-4 glass-panel border-b border-white/40 dark:border-gray-700/40 sticky top-0 z-40">
+      <div className="md:hidden flex items-center justify-between p-4 glass-panel border-b border-white/6 sticky top-0 z-40">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-rose-400 to-purple-500 flex items-center justify-center text-white shadow-lg">
-            <Heart size={16} fill="currentColor" />
+          <div className="w-8 h-8 rounded-full shadow-lg overflow-hidden border-2 border-[#D4A574]/25">
+            <img src="/foto_01.jpg" alt="Casal" className="w-full h-full object-cover" />
           </div>
-          <span className="font-semibold text-gray-800 dark:text-gray-100 text-sm">H & B</span>
+          <span className="font-semibold text-[#F0EDE8] text-sm">H & B</span>
         </div>
         <button
           onClick={() => setSidebarOpen(true)}
-          className="p-2 rounded-xl hover:bg-white/40 dark:hover:bg-gray-700/40 text-gray-600 dark:text-gray-300 cursor-pointer"
+          className="p-2 rounded-xl hover:bg-[#1C1C22] text-[#9A9590] cursor-pointer"
           aria-label="Abrir menu"
         >
           <Menu size={22} />
@@ -100,23 +106,23 @@ export const Layout = () => {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed md:static inset-y-0 left-0 z-50 w-64 glass-panel border-r border-white/40 dark:border-gray-700/40 flex flex-col p-6 shrink-0 transition-transform duration-300 md:translate-x-0",
+          "fixed md:static inset-y-0 left-0 z-50 w-64 glass-panel border-r border-white/6 flex flex-col p-6 shrink-0 transition-transform duration-300 md:translate-x-0",
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <div className="flex items-center justify-between mb-10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-rose-400 to-purple-500 flex items-center justify-center text-white shadow-lg">
-              <Heart size={20} fill="currentColor" />
+            <div className="w-12 h-12 rounded-full shadow-xl overflow-hidden border-2 border-[#D4A574]/25">
+              <img src="/foto_01.jpg" alt="Casal" className="w-full h-full object-cover" />
             </div>
             <div>
-              <h1 className="font-semibold text-gray-800 dark:text-gray-100 leading-tight">Henrique & Brenda</h1>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Nossa Jornada Juntos</p>
+              <h1 className="font-semibold text-[#F0EDE8] leading-tight">Henrique & Brenda</h1>
+              <p className="text-xs text-[#5A5650]">Nossa Jornada Juntos</p>
             </div>
           </div>
           <button
             onClick={closeSidebar}
-            className="md:hidden text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer"
+            className="md:hidden text-[#5A5650] hover:text-[#9A9590] cursor-pointer"
             aria-label="Fechar menu"
           >
             <X size={20} />
@@ -132,8 +138,8 @@ export const Layout = () => {
               className={({ isActive }) => cn(
                 "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200",
                 isActive 
-                  ? "bg-white/60 dark:bg-white/10 text-rose-600 dark:text-rose-400 shadow-sm border border-white/50 dark:border-white/10" 
-                  : "text-gray-600 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/5 hover:text-rose-500"
+                  ? "bg-[#D4A574]/10 text-[#D4A574] shadow-sm border border-[#D4A574]/30" 
+                  : "text-[#9A9590] hover:bg-[#141418] hover:text-[#F0EDE8]/80"
               )}
             >
               <item.icon size={18} />
@@ -143,11 +149,11 @@ export const Layout = () => {
         </nav>
 
         {/* Sidebar footer actions */}
-        <div className="border-t border-white/30 dark:border-gray-700/30 pt-4 mt-4 space-y-2">
+        <div className="border-t border-white/6 pt-4 mt-4 space-y-2">
           <div className="flex gap-2">
             <button
               onClick={handleExport}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/5 transition-colors cursor-pointer"
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-[#5A5650] hover:bg-[#141418] hover:text-[#9A9590] transition-colors cursor-pointer"
               title="Exportar dados"
             >
               <Download size={14} />
@@ -155,7 +161,7 @@ export const Layout = () => {
             </button>
             <button
               onClick={handleImport}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/5 transition-colors cursor-pointer"
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-[#5A5650] hover:bg-[#141418] hover:text-[#9A9590] transition-colors cursor-pointer"
               title="Importar dados"
             >
               <Upload size={14} />
@@ -166,7 +172,7 @@ export const Layout = () => {
           <div className="flex gap-2">
             <button
               onClick={toggleTheme}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/5 transition-colors cursor-pointer"
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-[#5A5650] hover:bg-[#141418] hover:text-[#9A9590] transition-colors cursor-pointer"
               title={theme === 'light' ? 'Modo escuro' : 'Modo claro'}
             >
               {theme === 'light' ? <Moon size={14} /> : <Sun size={14} />}
@@ -174,7 +180,7 @@ export const Layout = () => {
             </button>
             <button
               onClick={handleLogout}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-gray-500 dark:text-gray-400 hover:bg-rose-100/50 dark:hover:bg-rose-900/20 hover:text-rose-500 transition-colors cursor-pointer"
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-[#5A5650] hover:bg-[#141418] hover:text-[#9A9590] transition-colors cursor-pointer"
               title="Sair"
             >
               <LogOut size={14} />
@@ -191,6 +197,7 @@ export const Layout = () => {
       </main>
 
       <ToastContainer toasts={toasts} onDismiss={removeToast} />
+      <InstallPrompt />
     </div>
   );
 };

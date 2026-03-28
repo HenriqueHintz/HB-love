@@ -33,22 +33,22 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{ duration: 0.15 }}
-            className="bg-white dark:bg-gray-800 border border-white/50 dark:border-gray-700 shadow-2xl rounded-2xl w-full max-w-sm p-6"
+            className="bg-[#141418] border border-white/50 shadow-2xl rounded-2xl w-full max-w-sm p-6"
           >
             <div className="flex items-center gap-3 mb-4">
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center ${
                   variant === 'danger'
-                    ? 'bg-red-100 dark:bg-red-900/30 text-red-500'
+                    ? 'bg-red-500/50/10 dark:bg-red-900/30 text-red-400/70'
                     : 'bg-amber-100 dark:bg-amber-900/30 text-amber-500'
                 }`}
               >
                 <AlertTriangle size={20} />
               </div>
-              <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100">{title}</h3>
+              <h3 className="text-lg font-bold text-[#F0EDE8] dark:text-[#F0EDE8]">{title}</h3>
             </div>
 
-            <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm leading-relaxed">
+            <p className="text-[#9A9590] dark:text-[#5A5650] mb-6 text-sm leading-relaxed">
               {message}
             </p>
 
@@ -60,8 +60,8 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
                 onClick={onConfirm}
                 className={
                   variant === 'danger'
-                    ? 'bg-red-500 hover:bg-red-600 text-white'
-                    : 'bg-amber-500 hover:bg-amber-600 text-white'
+                    ? 'bg-red-500/50 hover:bg-red-600 text-white'
+                    : 'bg-[#D4A574]/100 hover:bg-amber-600 text-white'
                 }
               >
                 {confirmLabel}

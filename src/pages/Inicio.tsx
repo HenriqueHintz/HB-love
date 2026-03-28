@@ -1,19 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Heart, Lock } from 'lucide-react';
+import { Heart, Sparkles } from 'lucide-react';
 import { useStore } from '../store/useStore';
-
-const CORRECT_PIN = '1227';
 
 export const Inicio = () => {
   const navigate = useNavigate();
   const authenticate = useStore(state => state.authenticate);
   const isAuthenticated = useStore(state => state.isAuthenticated);
-  const [pin, setPin] = useState(['', '', '', '']);
-  const [error, setError] = useState(false);
-  const [shake, setShake] = useState(false);
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -21,132 +15,139 @@ export const Inicio = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  const handlePinChange = (index: number, value: string) => {
-    if (!/^\d*$/.test(value)) return;
-    
-    const newPin = [...pin];
-    newPin[index] = value.slice(-1);
-    setPin(newPin);
-    setError(false);
-
-    // Auto-focus next input
-    if (value && index < 3) {
-      inputRefs.current[index + 1]?.focus();
-    }
-
-    // Check PIN when all 4 digits entered
-    const fullPin = newPin.join('');
-    if (fullPin.length === 4) {
-      if (fullPin === CORRECT_PIN) {
-        authenticate();
-        navigate('/painel');
-      } else {
-        setError(true);
-        setShake(true);
-        setTimeout(() => {
-          setShake(false);
-          setPin(['', '', '', '']);
-          inputRefs.current[0]?.focus();
-        }, 600);
-      }
-    }
+  const handleEnter = () => {
+    authenticate();
+    navigate('/painel');
   };
 
-  const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
-    if (e.key === 'Backspace' && !pin[index] && index > 0) {
-      inputRefs.current[index - 1]?.focus();
-    }
-  };
-
-  const handlePaste = (e: React.ClipboardEvent) => {
-    const pasted = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 4);
-    if (pasted.length === 4) {
-      const newPin = pasted.split('');
-      setPin(newPin);
-      if (pasted === CORRECT_PIN) {
-        authenticate();
-        navigate('/painel');
-      } else {
-        setError(true);
-        setShake(true);
-        setTimeout(() => {
-          setShake(false);
-          setPin(['', '', '', '']);
-          inputRefs.current[0]?.focus();
-        }, 600);
-      }
-    }
-  };
+  const photos = [
+    '/foto_01.jpg',
+    '/foto_02.jpg',
+  ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-rose-300/20 blur-3xl" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-300/20 blur-3xl" />
-      
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="glass-panel p-12 rounded-3xl max-w-lg w-full text-center relative z-10"
-      >
-        <motion.div 
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-          className="w-20 h-20 mx-auto bg-gradient-to-br from-rose-400 to-purple-500 rounded-full flex items-center justify-center text-white shadow-xl mb-8"
-        >
-          <Heart size={40} fill="currentColor" />
-        </motion.div>
-        
-        <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-100 mb-2 font-serif">Henrique & Brenda</h1>
-        <p className="text-rose-500 font-medium mb-6 tracking-wide uppercase text-sm">Nossa Jornada Juntos</p>
-        
-        <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed text-sm">
-          Um espaço privado para organizar nossos sonhos, acompanhar nossas metas e registrar os momentos mais inesquecíveis da nossa história.
-        </p>
+    <div className="hero-wrapper">
+      {/* 4-Photo Quadrant Background */}
+      <div className="hero-bg">
+        <div className="hero-quadrant-grid">
+          {photos.map((src, i) => (
+            <motion.div
+              key={i}
+              className="hero-quadrant"
+              initial={{ opacity: 0, scale: 1.15 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <img
+                src={src}
+                alt=""
+                className="hero-quadrant-img"
+                loading="eager"
+                draggable={false}
+              />
+            </motion.div>
+          ))}
+        </div>
+        {/* Noir overlays */}
+        <div className="hero-overlay" />
+        <div className="hero-overlay-radial" />
+        {/* Grid line accents */}
+        <div className="hero-grid-lines" />
+      </div>
 
-        {/* PIN Input */}
+      {/* Ambient glow blobs */}
+      <motion.div
+        className="hero-particle hero-particle-1"
+        animate={{ y: [0, -20, 0], opacity: [0.3, 0.6, 0.3] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="hero-particle hero-particle-2"
+        animate={{ y: [0, 15, 0], opacity: [0.2, 0.5, 0.2] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+      />
+
+      {/* Glass card */}
+      <motion.div
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+        className="hero-card"
+      >
+        {/* Avatar */}
+        <motion.div
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ delay: 0.5, type: 'spring', stiffness: 150, damping: 15 }}
+          className="hero-avatar"
+        >
+          <img src="/foto_01.jpg" alt="Henrique & Brenda" className="hero-avatar-img" />
+          <div className="hero-avatar-ring" />
+          <motion.div
+            className="hero-avatar-heart"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <Heart size={14} fill="currentColor" />
+          </motion.div>
+        </motion.div>
+
+        {/* Sparkle */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="hero-sparkle"
+        >
+          <Sparkles size={16} />
+        </motion.div>
+
+        {/* Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+        >
+          <h1 className="hero-title">Henrique & Brenda</h1>
+          <div className="hero-divider">
+            <span className="hero-divider-line" />
+            <Heart size={12} className="hero-divider-icon" fill="currentColor" />
+            <span className="hero-divider-line" />
+          </div>
+          <p className="hero-subtitle">Nossa Jornada Juntos</p>
+        </motion.div>
+
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9, duration: 0.8 }}
+          className="hero-description"
+        >
+          Um espaço criado com carinho para guardar nossos sonhos, celebrar nossas conquistas e eternizar cada momento da nossa história de amor.
+        </motion.p>
+
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 1.1, duration: 0.6 }}
         >
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <Lock size={14} className="text-gray-400" />
-            <span className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium">
-              Digite o PIN para entrar
-            </span>
-          </div>
-
-          <div className={`flex justify-center gap-3 mb-4 ${shake ? 'animate-shake' : ''}`}>
-            {pin.map((digit, index) => (
-              <input
-                key={index}
-                ref={(el) => { inputRefs.current[index] = el; }}
-                type="text"
-                inputMode="numeric"
-                maxLength={1}
-                value={digit}
-                onChange={(e) => handlePinChange(index, e.target.value)}
-                onKeyDown={(e) => handleKeyDown(index, e)}
-                onPaste={index === 0 ? handlePaste : undefined}
-                className={`pin-input ${error ? 'border-red-400 dark:border-red-500' : ''}`}
-                autoFocus={index === 0}
-              />
-            ))}
-          </div>
-
-          {error && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-red-500 text-sm font-medium"
-            >
-              PIN incorreto. Tente novamente.
-            </motion.p>
-          )}
+          <button onClick={handleEnter} className="hero-cta">
+            <span className="hero-cta-glow" />
+            <Heart size={18} className="hero-cta-icon" />
+            <span>Entrar no nosso mundo</span>
+          </button>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4 }}
+          className="hero-date"
+        >
+          ✦ Juntos desde sempre, para sempre ✦
+        </motion.p>
       </motion.div>
     </div>
   );

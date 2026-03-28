@@ -45,9 +45,7 @@ export const LinhaDoTempo = () => {
     return <Heart size={16} />;
   };
   const getColor = (t: string) => {
-    if (t === 'trip') return 'bg-blue-500';
-    if (t === 'date') return 'bg-purple-500';
-    return 'bg-rose-500';
+    return 'bg-[#141418]/20';
   };
 
   const handleAdd = (e: React.FormEvent) => {
@@ -73,7 +71,7 @@ export const LinhaDoTempo = () => {
   };
 
   const TypeSelect = ({ value, onChange }: { value: string; onChange: (v: any) => void }) => (
-    <select value={value} onChange={e => onChange(e.target.value)} className="w-full bg-white/70 dark:bg-gray-800/70 border border-white/80 dark:border-gray-700 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-rose-400 text-gray-800 dark:text-gray-200">
+    <select value={value} onChange={e => onChange(e.target.value)} className="glass-input">
       <option value="milestone">Marco Importante</option>
       <option value="trip">Viagem</option>
       <option value="date">Encontro Especial</option>
@@ -84,8 +82,8 @@ export const LinhaDoTempo = () => {
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Linha do Tempo</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">A história do nosso relacionamento.</p>
+          <h1 className="text-3xl font-bold text-[#F0EDE8]">Linha do Tempo</h1>
+          <p className="text-[#5A5650] mt-1">A história do nosso relacionamento.</p>
         </div>
         <Button onClick={() => setIsAdding(true)} className="gap-2"><Plus size={18} />Novo Evento</Button>
       </div>
@@ -95,27 +93,27 @@ export const LinhaDoTempo = () => {
       <AnimatePresence>
         {isAdding && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
-            <form onSubmit={handleAdd} className="glass-panel p-6 rounded-2xl shadow-lg border border-white/80 dark:border-gray-700">
+            <form onSubmit={handleAdd} className="glass-panel p-6 rounded-2xl shadow-lg border border-white/60">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100">Adicionar Evento</h3>
-                <button type="button" onClick={() => setIsAdding(false)} className="text-gray-400 hover:text-gray-600 cursor-pointer"><X size={20} /></button>
+                <h3 className="text-lg font-bold text-[#F0EDE8]">Adicionar Evento</h3>
+                <button type="button" onClick={() => setIsAdding(false)} className="text-[#5A5650] hover:text-[#9A9590] cursor-pointer"><X size={20} /></button>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wider">Título</label>
-                  <input type="text" required value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-white/70 dark:bg-gray-800/70 border border-white/80 dark:border-gray-700 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-rose-400 text-gray-800 dark:text-gray-200" />
+                  <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Título</label>
+                  <input type="text" required value={title} onChange={e => setTitle(e.target.value)} className="glass-input" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wider">Data</label>
-                  <input type="date" required value={date} onChange={e => setDate(e.target.value)} className="w-full bg-white/70 dark:bg-gray-800/70 border border-white/80 dark:border-gray-700 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-rose-400 text-gray-800 dark:text-gray-200" />
+                  <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Data</label>
+                  <input type="date" required value={date} onChange={e => setDate(e.target.value)} className="glass-input" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wider">Tipo</label>
+                  <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Tipo</label>
                   <TypeSelect value={type} onChange={setType} />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wider">Descrição</label>
-                  <textarea rows={2} value={description} onChange={e => setDescription(e.target.value)} className="w-full bg-white/70 dark:bg-gray-800/70 border border-white/80 dark:border-gray-700 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-rose-400 resize-none text-gray-800 dark:text-gray-200" />
+                  <label className="block text-xs font-medium text-[#5A5650] mb-1 uppercase tracking-wider">Descrição</label>
+                  <textarea rows={2} value={description} onChange={e => setDescription(e.target.value)} className="glass-input resize-none" />
                 </div>
                 <div className="md:col-span-2">
                   <MediaUploadField mediaUrl={upload.mediaUrl} mediaType={upload.mediaType} mediaName={upload.mediaName} onFileUpload={upload.handleFileUpload} onClear={upload.clearMedia} height="h-24" label="Mídia (Opcional)" />
@@ -131,26 +129,26 @@ export const LinhaDoTempo = () => {
       </AnimatePresence>
 
       {sorted.length === 0 ? <EmptyState type="timeline" searchQuery={searchQuery} /> : (
-        <div className="relative border-l-2 border-rose-200 dark:border-rose-800 ml-4 md:ml-8 py-4 space-y-12">
+        <div className="relative border-l-2 border-white/6 ml-4 md:ml-8 py-4 space-y-12">
           <AnimatePresence>
             {sorted.map((event, index) => (
               <motion.div key={event.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ delay: index * 0.1 }} className="relative pl-8 md:pl-12 group" layout>
-                <div className={`absolute -left-[17px] top-1 w-8 h-8 rounded-full border-4 border-rose-50 dark:border-gray-900 flex items-center justify-center text-white shadow-md ${getColor(event.type)}`}>
+                <div className={`absolute -left-[17px] top-1 w-8 h-8 rounded-full border-4 border-black/20 flex items-center justify-center text-[#F0EDE8] shadow-md ${getColor(event.type)}`}>
                   {getIcon(event.type)}
                 </div>
                 <div className="glass-panel p-6 rounded-2xl hover:shadow-lg transition-shadow relative">
                   <div className="absolute top-4 right-4 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button onClick={() => openEdit(event)} className="text-gray-400 hover:text-rose-500 cursor-pointer"><Edit3 size={16} /></button>
-                    <button onClick={() => setDeleteId(event.id)} className="text-gray-400 hover:text-red-500 cursor-pointer"><Trash2 size={16} /></button>
+                    <button onClick={() => openEdit(event)} className="text-[#5A5650] hover:text-[#9A9590] cursor-pointer"><Edit3 size={16} /></button>
+                    <button onClick={() => setDeleteId(event.id)} className="text-[#5A5650] hover:text-red-400 cursor-pointer"><Trash2 size={16} /></button>
                   </div>
-                  <span className="text-sm font-bold text-rose-500 uppercase tracking-wider">{format(parseISO(event.date), "dd 'de' MMMM, yyyy", { locale: ptBR })}</span>
-                  <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-2">{event.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 mt-2">{event.description}</p>
+                  <span className="text-sm font-bold text-[#9A9590] uppercase tracking-wider">{format(parseISO(event.date), "dd 'de' MMMM, yyyy", { locale: ptBR })}</span>
+                  <h3 className="text-xl font-bold text-[#F0EDE8] mt-2">{event.title}</h3>
+                  <p className="text-[#9A9590] mt-2">{event.description}</p>
                   {event.mediaUrl && (
-                    <div className="mt-4 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 max-w-lg">
-                      {event.mediaType === 'video' ? <video src={event.mediaUrl} controls className="w-full max-h-64 object-contain" /> :
-                       event.mediaType === 'document' ? <a href={event.mediaUrl} download={event.mediaName} className="flex items-center gap-3 p-3 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300"><FileText size={24} className="text-rose-500" /><span className="text-sm font-medium truncate">{event.mediaName || 'Arquivo'}</span></a> :
-                       <img src={event.mediaUrl} alt={event.title} className="w-full max-h-64 object-cover" />}
+                    <div className="mt-4 media-container bg-[#1C1C22] border border-white/6 max-w-lg">
+                      {event.mediaType === 'video' ? <video src={event.mediaUrl} controls className="w-full h-auto object-contain" /> :
+                       event.mediaType === 'document' ? <a href={event.mediaUrl} download={event.mediaName} className="flex items-center gap-3 p-3 hover:bg-[#141418] text-[#9A9590]"><FileText size={24} className="text-[#5A5650]" /><span className="text-sm font-medium truncate">{event.mediaName || 'Arquivo'}</span></a> :
+                       <img src={event.mediaUrl} alt={event.title} className="w-full h-auto object-contain" loading="lazy" />}
                     </div>
                   )}
                 </div>
@@ -163,19 +161,19 @@ export const LinhaDoTempo = () => {
       {/* Edit Modal */}
       <AnimatePresence>
         {editing && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md shadow-2xl rounded-3xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
-              <div className="flex justify-between items-center p-6 border-b border-gray-100 dark:border-gray-700">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">Editar Evento</h2>
-                <button onClick={() => { setEditing(null); eUpload.clearMedia(); }} className="text-gray-400 hover:text-gray-600 cursor-pointer"><X size={24} /></button>
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A0A0C]/60 backdrop-blur-sm">
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="glass-panel shadow-2xl rounded-3xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh] border border-white/6">
+              <div className="flex justify-between items-center p-6 border-b border-white/6">
+                <h2 className="text-xl font-bold text-[#F0EDE8]">Editar Evento</h2>
+                <button onClick={() => { setEditing(null); eUpload.clearMedia(); }} className="text-[#5A5650] hover:text-[#9A9590] cursor-pointer"><X size={24} /></button>
               </div>
               <form onSubmit={handleUpdate} className="p-6 overflow-y-auto flex-1 space-y-4">
-                <input type="text" required value={eTitle} onChange={e => setETitle(e.target.value)} placeholder="Título" className="w-full bg-white/50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-400 text-gray-800 dark:text-gray-200" />
+                <input type="text" required value={eTitle} onChange={e => setETitle(e.target.value)} placeholder="Título" className="glass-input py-3" />
                 <div className="grid grid-cols-2 gap-4">
-                  <input type="date" required value={eDate} onChange={e => setEDate(e.target.value)} className="w-full bg-white/50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-400 text-gray-800 dark:text-gray-200" />
+                  <input type="date" required value={eDate} onChange={e => setEDate(e.target.value)} className="glass-input py-3" />
                   <TypeSelect value={eType} onChange={setEType} />
                 </div>
-                <textarea rows={3} value={eDesc} onChange={e => setEDesc(e.target.value)} placeholder="Descrição" className="w-full bg-white/50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-400 resize-none text-gray-800 dark:text-gray-200" />
+                <textarea rows={3} value={eDesc} onChange={e => setEDesc(e.target.value)} placeholder="Descrição" className="glass-input py-3 resize-none" />
                 <MediaUploadField mediaUrl={eUpload.mediaUrl} mediaType={eUpload.mediaType} mediaName={eUpload.mediaName} onFileUpload={eUpload.handleFileUpload} onClear={eUpload.clearMedia} height="h-28" />
                 <div className="flex justify-end gap-3 pt-2">
                   <Button type="button" variant="ghost" onClick={() => { setEditing(null); eUpload.clearMedia(); }}>Cancelar</Button>
